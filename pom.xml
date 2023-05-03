@@ -5,7 +5,7 @@
     <artifactId>DDTGA-FIRMA-ELECTRONICA-AUTOMATIZACION</artifactId>
     <version>0.0.1-SNAPSHOT</version>
 
-    <name>Proyecto Automatizacion Firma electronica Serenity BDD usando Cucumber PageObject</name>
+    <name>Proyecto Automatizacion Firma electronica Serenity BDD usando Cucumber </name>
 
     <properties>
         <serenity.version>3.2.4</serenity.version>
