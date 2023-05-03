@@ -1,0 +1,29 @@
+name: automated-testing-integration
+
+on:
+  push:
+    branches:
+      - staging
+      - master
+  schedule:
+    - cron: "00 11 28 * *"
+  workflow_dispatch: # Para ejecutar de forma manual desde Git Actions "Run workflow"
+
+jobs:
+  integration-test:
+    uses: bancodebogota/bbog-dig-do-testing-pipeline/.github/workflows/frontend_continuous_testing.yml@v1.0.0
+    with:
+      environment: st_pipeline
+      enable: 'true' # Habilitador del pipeline
+      use-aws-credentials: 'false'
+      command-execute: 'mvn clean verify -D environment=run_on_browserstack_Windows11'
+      command-install: 'mvn -DskipTests=true install'
+      repository: 'bbog-vcd-automation-testing'
+      files-to-export: >
+        target/site/serenity/serenity-summary.html
+        scan-results/**
+      folder-zap-reports: scan-results
+      dependencies-file-cache: '**/pom.xml'
+      folder-libraries-cache: ~/.m2
+    secrets:
+      DIG_READER_GITHUB_ACCESS_TOKEN: ${{ secrets.DIG_READER_GITHUB_ACCESS_TOKEN }}
